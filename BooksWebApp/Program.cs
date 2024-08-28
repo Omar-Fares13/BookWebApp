@@ -1,3 +1,6 @@
+using BooksWebApp.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace BooksWebApp
 {
     public class Program
@@ -8,6 +11,10 @@ namespace BooksWebApp
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
+                builder.Configuration.GetConnectionString("DefaultConnection")
+                ));
 
             var app = builder.Build();
 
